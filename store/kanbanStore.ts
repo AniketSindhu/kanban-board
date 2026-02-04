@@ -109,10 +109,10 @@ export const useKanbanStore = create<KanbanState>()(
         {
           id: 'infra-3',
           title: 'Migrate kanban from file-based to Neon DB',
-          column: 'building',
+          column: 'review',
           priority: 'high',
           tags: ['infra', 'database', 'neon', 'migration'],
-          description: 'Neon connection secured in keychain. Move kanban data from local files to PostgreSQL. Eliminate unnecessary Git commits. Real-time sync.',
+          description: '✅ API routes created (/api/tasks). ✅ Migration script ready. ✅ Neon DB connected. NEXT: Add DATABASE_URL to Vercel env vars, run migration, test data flow.',
           createdAt: new Date().toISOString(),
         },
         {
