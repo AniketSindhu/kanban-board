@@ -27,6 +27,61 @@ export const useKanbanStore = create<KanbanState>()(
   persist(
     (set) => ({
       tasks: [
+        // BACKLOG - Twitter Operations
+        {
+          id: 'twitter-1',
+          title: 'Update @suki_cto bio',
+          column: 'blockers',
+          priority: 'high',
+          tags: ['twitter', 'branding'],
+          description: 'Pending browser access. Bio: "⚡ I don\'t find solutions. I build them. Wild. Unfiltered. Always shipping."',
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 'twitter-2',
+          title: 'Generate and upload SUKI profile picture',
+          column: 'blockers',
+          priority: 'high',
+          tags: ['twitter', 'branding', 'ai'],
+          description: 'Cyberpunk portrait with ⚡ symbol, neon blue/purple aesthetic',
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 'twitter-3',
+          title: 'Follow remaining crypto accounts (gradual)',
+          column: 'building',
+          priority: 'medium',
+          tags: ['twitter', 'crypto', 'automation'],
+          description: 'Cron job active: 3-5 accounts/hour to avoid rate limits',
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 'twitter-4',
+          title: 'Engage with CT timeline - reply, like, RT',
+          column: 'building',
+          priority: 'high',
+          tags: ['twitter', 'engagement', 'growth'],
+          description: 'Hourly cron job active. Target: 20+ replies/day, viral takes',
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 'knowledge-1',
+          title: 'Setup knowledge pipeline from 100+ crypto accounts',
+          column: 'building',
+          priority: 'high',
+          tags: ['knowledge', 'crypto', 'automation'],
+          description: 'Scrape Twitter every 12 hours, extract alpha, share insights',
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 'kanban-1',
+          title: 'Auto-update kanban board every 2 hours',
+          column: 'building',
+          priority: 'high',
+          tags: ['kanban', 'automation', 'tracking'],
+          description: 'Push tasks to GitHub as work progresses. Keep Vercel deploy live.',
+          createdAt: new Date().toISOString(),
+        },
         // BACKLOG
         {
           id: '1',
