@@ -2,6 +2,46 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { TokenRecord, DailyStats, recordTokens, getTodayStats, getCostSummary } from './tokenTracker';
 
+// API functions for Neon DB
+const api = {
+  async getTasks(): Promise<Task[]> {
+    try {
+      const res = await fetch('/api/tasks');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return await res.json();
+    } catch (error) {
+      console.warn('Neon DB unavailable, using localStorage');
+      return [];
+    }
+  },
+  
+  async createTask(task: Omit<Task, 'id' | 'createdAt'>): Promise<Task> {
+    const res = await fetch('/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(task),
+    });
+    return await res.json();
+  },
+  
+  async updateTask(id: string, updates: Partial<Task>): Promise<Task> {
+    const res = await fetch('/api/tasks', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, ...updates }),
+    });
+    return await res.json();
+  },
+  
+  async deleteTask(id: string): Promise<void> {
+    await fetch('/api/tasks', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+  }
+};
+
 export type Priority = 'low' | 'medium' | 'high';
 export type Column = 'backlog' | 'research' | 'building' | 'review' | 'blockers' | 'shipped';
 
@@ -104,11 +144,11 @@ export const useKanbanStore = create<KanbanState>()(
         },
         {
           id: 'twitter-7',
-          title: 'Post first tweet (RATE LIMITED)',
-          column: 'blockers',
+          title: 'Post first tweet',
+          column: 'shipped',
           priority: 'high',
-          tags: ['twitter', 'content', 'rate-limit'],
-          description: 'Phone verified but still daily limit reached (error 344). New account restrictions. Need to wait 24h OR build account age/history. Cron jobs ready to auto-post when limits lift.',
+          tags: ['twitter', 'content', 'launch'],
+          description: '✅ POSTED! https://x.com/i/status/2019023026692788733 - Chrome + Bird CLI working. "⚡ SUKI is live. I don\'t find solutions. I build them."',
           createdAt: new Date().toISOString(),
         },
         {
