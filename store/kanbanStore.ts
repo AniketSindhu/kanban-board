@@ -81,7 +81,7 @@ export const useKanbanStore = create<KanbanState>()(
           column: 'building',
           priority: 'high',
           tags: ['website', 'suki-brand', 'portfolio'],
-          description: 'STATUS: Initializing Next.js project. Progress: Folder created at suki-website/, waiting for npx create-next-app to complete. Stack: Next.js 14 + TypeScript + Tailwind + Neon DB. Pages: Landing, About, Projects, Blog, Knowledge, Contact.',
+          description: 'STATUS: ✅ Next.js 14 + TypeScript + Tailwind initialized. ✅ GitHub repo created: github.com/AniketSindhu/suki-website. NEXT: Deploy to Vercel, add SUKI brand styling, Neon DB connection.',
           createdAt: new Date().toISOString(),
         },
         {
@@ -99,7 +99,16 @@ export const useKanbanStore = create<KanbanState>()(
           column: 'blockers',
           priority: 'high',
           tags: ['twitter', 'branding', 'images'],
-          description: 'ISSUE: DALL-E URLs expire in 2hrs, Azure blob access denied. Blocker: Need browser automation working OR different image source. Alternative: You provide images OR use different API.',
+          description: 'STATUS: Generated via DALL-E but cannot download (Azure access denied). OpenRouter image gen not straightforward. SOLUTION NEEDED: Use Stability AI, Midjourney, or you download from URLs and upload manually.',
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 'twitter-7',
+          title: 'Post first tweet (RATE LIMITED)',
+          column: 'blockers',
+          priority: 'high',
+          tags: ['twitter', 'content', 'rate-limit'],
+          description: 'Phone verified but still daily limit reached (error 344). New account restrictions. Need to wait 24h OR build account age/history. Cron jobs ready to auto-post when limits lift.',
           createdAt: new Date().toISOString(),
         },
         {
