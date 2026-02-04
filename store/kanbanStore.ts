@@ -78,10 +78,10 @@ export const useKanbanStore = create<KanbanState>()(
         {
           id: 'website-1',
           title: 'Build SUKI website - suki.sh or suki.io',
-          column: 'building',
+          column: 'review',
           priority: 'high',
           tags: ['website', 'suki-brand', 'portfolio'],
-          description: 'STATUS: ✅ Next.js 14 + TypeScript + Tailwind initialized. ✅ GitHub repo created: github.com/AniketSindhu/suki-website. NEXT: Deploy to Vercel, add SUKI brand styling, Neon DB connection.',
+          description: 'STATUS: ✅ Next.js 14 + TypeScript + Tailwind initialized. ✅ GitHub repo created. ✅ Static build configured. NEXT: Vercel deployment (need CLI login), add SUKI brand styling, Neon DB connection.',
           createdAt: new Date().toISOString(),
         },
         {
