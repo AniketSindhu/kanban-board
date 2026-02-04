@@ -356,6 +356,7 @@ export const useKanbanStore = create<KanbanState>()(
           createdAt: new Date().toISOString(),
         },
       ],
+      tokenHistory: [],
       addTask: (task) =>
         set((state) => ({
           tasks: [
