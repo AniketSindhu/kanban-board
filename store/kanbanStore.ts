@@ -84,11 +84,11 @@ export const useKanbanStore = create<KanbanState>()(
         },
         {
           id: 'infra-1',
-          title: 'Configure cost-optimized AI models for all operations',
+          title: 'Configure UNIVERSAL cost-optimized AI models',
           column: 'shipped',
           priority: 'high',
-          tags: ['infra', 'cost-optimization', 'models'],
-          description: 'All cron jobs updated: Twitter→Kimi K2.5, Kanban→Deepseek Coder, Knowledge→Deepseek v3, Following→Haiku. Monthly cost: ~$1.61',
+          tags: ['infra', 'cost-optimization', 'models', 'universal-config'],
+          description: 'Default models for ALL tasks: Haiku (checks), Deepseek Coder (code), Deepseek v3 (research), Kimi K2.5 (creative), Gemini Flash (vision). Monthly budget: $5',
           createdAt: new Date().toISOString(),
         },
         // BACKLOG
