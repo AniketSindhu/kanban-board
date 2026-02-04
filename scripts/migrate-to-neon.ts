@@ -1,5 +1,5 @@
-# Neon DB Migration Script for Kanban
-# Run this to migrate existing localStorage data to Neon PostgreSQL
+// Neon DB Migration Script for Kanban
+// Run this to migrate existing localStorage data to Neon PostgreSQL
 
 import { Pool } from '@neondatabase/serverless';
 
