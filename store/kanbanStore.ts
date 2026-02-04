@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { TokenRecord, DailyStats, recordTokens, getTodayStats, getCostSummary } from './tokenTracker';
 
 export type Priority = 'low' | 'medium' | 'high';
 export type Column = 'backlog' | 'research' | 'building' | 'review' | 'blockers' | 'shipped';
@@ -13,14 +14,24 @@ export interface Task {
   tags: string[];
   dueDate?: string;
   createdAt: string;
+  // Token tracking
+  inputTokens?: number;
+  outputTokens?: number;
+  modelUsed?: string;
+  costUsd?: number;
 }
 
 interface KanbanState {
   tasks: Task[];
+  tokenHistory: TokenRecord[];
   addTask: (task: Omit<Task, 'id' | 'createdAt'>) => void;
   moveTask: (taskId: string, newColumn: Column) => void;
   updateTask: (taskId: string, updates: Partial<Task>) => void;
   deleteTask: (taskId: string) => void;
+  // Token tracking methods
+  recordTaskTokens: (taskId: string, model: string, inputTokens: number, outputTokens: number) => void;
+  getTodayStats: () => DailyStats;
+  getCostSummary: () => string;
 }
 
 export const useKanbanStore = create<KanbanState>()(
@@ -259,6 +270,28 @@ export const useKanbanStore = create<KanbanState>()(
           description: 'SOUL.md, USER.md, IDENTITY.md, HEARTBEAT.md created',
           createdAt: new Date().toISOString(),
         },
+        {
+          id: '18',
+          title: 'Setup token tracking for all operations',
+          column: 'shipped',
+          priority: 'high',
+          tags: ['infra', 'cost-tracking', 'analytics'],
+          description: 'Tracks input/output tokens per task, calculates cost per model, daily stats. Models: Kimi 2.5, MiniMax 2.1, Deepseek, Gemini Flash, Haiku, Grok (free), Cursor',
+          createdAt: new Date().toISOString(),
+          modelUsed: 'openrouter/deepseek/deepseek-coder',
+          inputTokens: 1500,
+          outputTokens: 800,
+          costUsd: 0.00069,
+        },
+        {
+          id: '19',
+          title: 'Integrate Grok for X research',
+          column: 'shipped',
+          priority: 'high',
+          tags: ['twitter', 'research', 'grok'],
+          description: 'Using bird CLI to access Grok for trending analysis, high-engagement tweet scans, sentiment analysis. FREE via X Premium.',
+          createdAt: new Date().toISOString(),
+        },
       ],
       addTask: (task) =>
         set((state) => ({
@@ -287,6 +320,21 @@ export const useKanbanStore = create<KanbanState>()(
         set((state) => ({
           tasks: state.tasks.filter((t) => t.id !== taskId),
         })),
+      // Token tracking
+      recordTaskTokens: (taskId, model, inputTokens, outputTokens) =>
+        set((state) => {
+          const record = recordTokens('Task: ' + taskId, model, inputTokens, outputTokens, 'main');
+          return {
+            tasks: state.tasks.map((t) =>
+              t.id === taskId
+                ? { ...t, modelUsed: model, inputTokens, outputTokens, costUsd: record.costUsd }
+                : t
+            ),
+            tokenHistory: [...state.tokenHistory, record],
+          };
+        }),
+      getTodayStats: () => getTodayStats(),
+      getCostSummary: () => getCostSummary(),
     }),
     {
       name: 'suki-kanban-storage',
