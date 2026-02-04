@@ -70,7 +70,7 @@ export const useKanbanStore = create<KanbanState>()(
           column: 'building',
           priority: 'high',
           tags: ['knowledge', 'crypto', 'automation'],
-          description: 'Scrape Twitter every 12 hours, extract alpha, share insights',
+          description: 'Cron job active: Every 12 hours. Uses Deepseek v3 ($0.50/M tokens). Scans followed accounts for 1000+ like tweets, extracts alpha.',
           createdAt: new Date().toISOString(),
         },
         {
@@ -79,7 +79,16 @@ export const useKanbanStore = create<KanbanState>()(
           column: 'building',
           priority: 'high',
           tags: ['kanban', 'automation', 'tracking'],
-          description: 'Push tasks to GitHub as work progresses. Keep Vercel deploy live.',
+          description: 'Cron job active. Using Deepseek Coder model ($0.30/M tokens). Pushes to GitHub automatically.',
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 'infra-1',
+          title: 'Configure cost-optimized AI models for all operations',
+          column: 'shipped',
+          priority: 'high',
+          tags: ['infra', 'cost-optimization', 'models'],
+          description: 'All cron jobs updated: Twitter→Kimi K2.5, Kanban→Deepseek Coder, Knowledge→Deepseek v3, Following→Haiku. Monthly cost: ~$1.61',
           createdAt: new Date().toISOString(),
         },
         // BACKLOG
