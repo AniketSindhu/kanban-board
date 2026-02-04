@@ -84,11 +84,20 @@ export const useKanbanStore = create<KanbanState>()(
         },
         {
           id: 'infra-1',
-          title: 'Configure UNIVERSAL cost-optimized AI models',
+          title: 'Configure UNIVERSAL cost-optimized AI models V2',
           column: 'shipped',
           priority: 'high',
           tags: ['infra', 'cost-optimization', 'models', 'universal-config'],
-          description: 'Default models for ALL tasks: Haiku (checks), Deepseek Coder (code), Deepseek v3 (research), Kimi K2.5 (creative), Gemini Flash (vision). Monthly budget: $5',
+          description: 'User-specified: Kimi K2.5 (brain/core), Cursor Pro (complex coding), Gemini Flash (vision), ElevenLabs (voice), Opus (emergency). MiniMax 2.1 not available - using Cursor instead.',
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 'infra-2',
+          title: 'Setup Cursor Pro integration for complex coding',
+          column: 'shipped',
+          priority: 'high',
+          tags: ['infra', 'cursor', 'coding', 'tools'],
+          description: 'Cursor CLI available at /usr/local/bin/cursor (v2.4.28). Use for: complex code generation, debugging, multi-file refactors. Use Deepseek Coder for quick edits via OpenRouter.',
           createdAt: new Date().toISOString(),
         },
         // BACKLOG
